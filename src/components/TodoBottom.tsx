@@ -1,22 +1,17 @@
 import classNames from "classnames";
 import { FilterTypes } from "../types/todo";
 import { capitalize } from "../utils";
+import { useTodos } from "../hooks/useTodos";
 
-interface TodoBottomProps {
-  itemsLeft: number;
-  completedTodosLength: number;
-  filter: FilterTypes;
-  setFilter: (filter: FilterTypes) => void;
-  clearCompleted: () => void;
-}
+const TodoBottom = () => {
+  const {
+    itemsLeft,
+    completedTodosLength,
+    filter,
+    setFilterType: setFilter,
+    clearCompleted,
+  } = useTodos();
 
-const TodoBottom = ({
-  itemsLeft,
-  completedTodosLength,
-  filter,
-  setFilter,
-  clearCompleted,
-}: TodoBottomProps) => {
   const filterBtns: FilterTypes[] = ["all", "active", "completed"];
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

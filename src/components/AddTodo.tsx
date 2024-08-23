@@ -1,11 +1,8 @@
 import { useState } from "react";
+import { useTodos } from "../hooks/useTodos";
 
-interface AddTodoProps {
-  addTodo: (text: string) => void;
-  toggleAll: (checked: boolean) => void;
-}
-
-const AddTodo = ({ addTodo, toggleAll }: AddTodoProps) => {
+const AddTodo = () => {
+  const { addTodo, toggleAll } = useTodos();
   const [text, setText] = useState("");
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {

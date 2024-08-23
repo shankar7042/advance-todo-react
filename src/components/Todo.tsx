@@ -1,15 +1,14 @@
 import classNames from "classnames";
 import { ITodo } from "../types/todo";
 import { useState } from "react";
+import { useTodos } from "../hooks/useTodos";
 
 interface TodoProps {
   todo: ITodo;
-  toggleTodo: (id: string, checked: boolean) => void;
-  deleteTodo: (id: string) => void;
-  updateTodoText: (id: string, text: string) => void;
 }
 
-const Todo = ({ todo, toggleTodo, deleteTodo, updateTodoText }: TodoProps) => {
+const Todo = ({ todo }: TodoProps) => {
+  const { toggleTodo, deleteTodo, updateTodoText } = useTodos();
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(todo.text);
 
