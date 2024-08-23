@@ -3,12 +3,12 @@ import { FilterTypes, ITodo } from "../../types/todo";
 import { getRandomId } from "../../utils";
 import { RootState } from "../../redux/store";
 
-interface TodoState {
+export interface TodoState {
   todos: ITodo[];
   filter: FilterTypes;
 }
 
-const initialState: TodoState = {
+export const initialState: TodoState = {
   todos: [],
   filter: "all",
 };
