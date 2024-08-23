@@ -1,13 +1,13 @@
-import { useTodos } from "../hooks/useTodos";
+import { useAppSelector } from "../redux/hooks";
 import Todo from "./Todo";
 
 const Todos = () => {
-  const { filteredTodos } = useTodos();
+  const todos = useAppSelector((state) => state.todoState.todos);
 
   return (
     <div className="mb-2">
       <ul>
-        {filteredTodos.map((todo) => (
+        {todos.map((todo) => (
           <Todo todo={todo} key={todo.id} />
         ))}
       </ul>

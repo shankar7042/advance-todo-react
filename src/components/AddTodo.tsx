@@ -1,15 +1,18 @@
 import { useState } from "react";
 import { useTodos } from "../hooks/useTodos";
+import { useAppDispatch } from "../redux/hooks";
+import { addTodo } from "../feature/todos/todoSlice";
 
 const AddTodo = () => {
-  const { addTodo, toggleAll } = useTodos();
+  const dispatch = useAppDispatch();
+  const { toggleAll } = useTodos();
   const [text, setText] = useState("");
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!text) return;
 
     if (e.key === "Enter") {
-      addTodo(text);
+      dispatch(addTodo(text));
       setText("");
     } else if (e.key === "Escape") {
       setText("");

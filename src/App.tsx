@@ -1,8 +1,8 @@
 import { AddTodo, Header, TodoBottom, Todos } from "./components";
-import { useTodos } from "./hooks/useTodos";
+import { useAppSelector } from "./redux/hooks";
 
 function App() {
-  const { todos } = useTodos();
+  const todos = useAppSelector((state) => state.todoState.todos);
 
   return (
     <main className="mt-5">
