@@ -1,8 +1,9 @@
 import { AddTodo, Header, TodoBottom, Todos } from "./components";
+import { selectTodos } from "./feature/todos/todoSlice";
 import { useAppSelector } from "./redux/hooks";
 
 function App() {
-  const todos = useAppSelector((state) => state.todoState.todos);
+  const todos = useAppSelector(selectTodos);
 
   return (
     <main className="mt-5">

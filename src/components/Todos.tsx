@@ -1,8 +1,9 @@
+import { selectTodos } from "../feature/todos/todoSlice";
 import { useAppSelector } from "../redux/hooks";
 import Todo from "./Todo";
 
 const Todos = () => {
-  const todos = useAppSelector((state) => state.todoState.todos);
+  const todos = useAppSelector(selectTodos);
 
   return (
     <div className="mb-2">

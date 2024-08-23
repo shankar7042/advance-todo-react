@@ -1,26 +1,30 @@
 import classNames from "classnames";
+import {
+  clearCompleted,
+  selectCompletedTodosLength,
+  selectFilter,
+  selectItemsLeft,
+  setFilter,
+} from "../feature/todos/todoSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { FilterTypes } from "../types/todo";
 import { capitalize } from "../utils";
-import { useTodos } from "../hooks/useTodos";
 
 const TodoBottom = () => {
-  const {
-    itemsLeft,
-    completedTodosLength,
-    filter,
-    setFilterType: setFilter,
-    clearCompleted,
-  } = useTodos();
+  const dispatch = useAppDispatch();
+  const filter = useAppSelector(selectFilter);
+  const itemsLeft = useAppSelector(selectItemsLeft);
+  const completedTodosLength = useAppSelector(selectCompletedTodosLength);
 
   const filterBtns: FilterTypes[] = ["all", "active", "completed"];
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const name = (e.target as HTMLButtonElement).name as FilterTypes;
-    setFilter(name);
+    dispatch(setFilter({ filter: name }));
   };
 
   const handleClear = () => {
-    clearCompleted();
+    dispatch(clearCompleted());
   };
 
   return (

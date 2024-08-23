@@ -1,24 +1,30 @@
 import classNames from "classnames";
 import { ITodo } from "../types/todo";
 import { useState } from "react";
-import { useTodos } from "../hooks/useTodos";
+import { useAppDispatch } from "../redux/hooks";
+import {
+  toggleTodo,
+  deleteTodo,
+  updateTodoText,
+} from "../feature/todos/todoSlice";
 
 interface TodoProps {
   todo: ITodo;
 }
 
 const Todo = ({ todo }: TodoProps) => {
-  const { toggleTodo, deleteTodo, updateTodoText } = useTodos();
+  const dispatch = useAppDispatch();
+
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState(todo.text);
 
   const handleToggle = (e: React.ChangeEvent<HTMLInputElement>) => {
     const checked = e.target.checked;
-    toggleTodo(todo.id, checked);
+    dispatch(toggleTodo({ id: todo.id, checked }));
   };
 
   const handleClick = () => {
-    deleteTodo(todo.id);
+    dispatch(deleteTodo({ id: todo.id }));
   };
 
   const handleDoubleClick = () => {
@@ -28,7 +34,7 @@ const Todo = ({ todo }: TodoProps) => {
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setIsEditing(false);
-      updateTodoText(todo.id, text);
+      dispatch(updateTodoText({ id: todo.id, text }));
     } else if (e.key === "Escape") {
       setIsEditing(false);
       setText(todo.text);
@@ -37,7 +43,7 @@ const Todo = ({ todo }: TodoProps) => {
 
   const handleBlur = () => {
     if (text && text !== todo.text) {
-      updateTodoText(todo.id, text);
+      dispatch(updateTodoText({ id: todo.id, text }));
     } else if (!text) {
       setText(todo.text);
     }
